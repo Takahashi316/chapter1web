@@ -28,7 +28,7 @@ public class CustomerServiceTest {
 
     public void getCustomerListTest() throws Exception{
         List<Customer> customerList=customerService.getCustomerList();
-        Assert.assertEquals(2,((List) customerList).size());
+        Assert.assertEquals(2, customerList.size());
     }
 
     @Test

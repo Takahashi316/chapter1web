@@ -6,6 +6,7 @@ import org.smart4j.chapter1.helper.DataBaseHelper;
 import org.smart4j.chapter1.model.Customer;
 import org.smart4j.chapter1.util.PropsUtil;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,34 +46,8 @@ public class CustomerService {
     }
 
     public List<Customer> getCustomerList(String keyword){
-        Connection conn =null;
-        try{
-
-            List<Customer> customerList=new ArrayList<>();
-            String sql="select * from customer";
-            conn=DriverManager.getConnection(URL,USERNAME,PASSWORD);
-            PreparedStatement stmt=conn.prepareStatement(sql);
-            ResultSet rs=stmt.executeQuery();
-            while (rs.next()) {
-                Customer customer=new Customer();
-
-                customer.setId(rs.getLong("id"));
-                customer.setName(rs.getString("name"));
-
-
-            }
-            return customerList;
-        }
-        catch (SQLException e){
-            logger.error("execute sql failure",e);
-
-        }
-        finally {
-            DataBaseHelper.closeConnection(conn);
-
-        }
-
-
+         String sql="select * from customer";
+         return DataBaseHelper.queryEntityList(Customer.class,sql);
 
 
 
